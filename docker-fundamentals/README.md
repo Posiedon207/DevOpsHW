@@ -1,69 +1,49 @@
 # Docker Fundamentals Homework
 
-This folder contains six complete Hello World web applications, each housed in its own folder with source code and Dockerfile.
+This folder contains six complete Hello World web applications, each housed in its own folder with source code, Dockerfile, and verification screenshot.
 
 ---
 
-## Folder Structure
+## Verified Screenshot Evidence
 
-```text
-docker-fundamentals/
-├── nodejs-app/       <- Node.js Express Hello World Application
-├── python-app/       <- Python HTTP Hello World Application
-├── java-app/         <- Java HTTP Hello World Application
-├── Apache-app/       <- Apache Web Server Hello World Application
-├── React-app/        <- React + Vite + Nginx Hello World Application
-└── nginx-app/        <- Nginx Web Server Hello World Application
-```
+### 1. Node.js Express Application (Port 3000)
+![Node.js App Screenshot](./screenshots/nodejs_app_screenshot.png)
+
+### 2. Python Web Application (Port 5000)
+![Python App Screenshot](./screenshots/python_app_screenshot.png)
+
+### 3. Java Web Application (Port 8080)
+![Java App Screenshot](./screenshots/java_app_screenshot.png)
+
+### 4. Apache Web Server Application (Port 8081)
+![Apache App Screenshot](./screenshots/apache_app_screenshot.png)
+
+### 5. React Web Application (Port 8082)
+![React App Screenshot](./screenshots/react_app_screenshot.png)
+
+### 6. Nginx Web Server Application (Port 8083)
+![Nginx App Screenshot](./screenshots/nginx_app_screenshot.png)
 
 ---
 
 ## Build & Run Instructions
 
-### 1. Node.js App (`nodejs-app`)
 ```bash
-cd nodejs-app
-docker build -t nodejs-hello-app .
-docker run -d -p 3000:3000 --name nodejs-container nodejs-hello-app
-curl http://localhost:3000
-```
+# Node.js
+cd nodejs-app && docker build -t nodejs-app . && docker run -d -p 3000:3000 nodejs-app
 
-### 2. Python App (`python-app`)
-```bash
-cd python-app
-docker build -t python-hello-app .
-docker run -d -p 5000:5000 --name python-container python-hello-app
-curl http://localhost:5000
-```
+# Python
+cd python-app && docker build -t python-app . && docker run -d -p 5000:5000 python-app
 
-### 3. Java App (`java-app`)
-```bash
-cd java-app
-docker build -t java-hello-app .
-docker run -d -p 8080:8080 --name java-container java-hello-app
-curl http://localhost:8080
-```
+# Java
+cd java-app && docker build -t java-app . && docker run -d -p 8080:8080 java-app
 
-### 4. Apache App (`Apache-app`)
-```bash
-cd Apache-app
-docker build -t apache-hello-app .
-docker run -d -p 8081:80 --name apache-container apache-hello-app
-curl http://localhost:8081
-```
+# Apache
+cd Apache-app && docker build -t apache-app . && docker run -d -p 8081:80 apache-app
 
-### 5. React App (`React-app`)
-```bash
-cd React-app
-docker build -t react-hello-app .
-docker run -d -p 8082:80 --name react-container react-hello-app
-curl http://localhost:8082
-```
+# React
+cd React-app && docker build -t react-app . && docker run -d -p 8082:80 react-app
 
-### 6. Nginx App (`nginx-app`)
-```bash
-cd nginx-app
-docker build -t nginx-hello-app .
-docker run -d -p 8083:80 --name nginx-container nginx-hello-app
-curl http://localhost:8083
+# Nginx
+cd nginx-app && docker build -t nginx-app . && docker run -d -p 8083:80 nginx-app
 ```

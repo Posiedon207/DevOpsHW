@@ -1,6 +1,12 @@
 # Shell Scripting Homework
 
-This folder contains the System Information bash script assignment.
+This folder contains the System Information bash script assignment and execution screenshot evidence.
+
+---
+
+## Screenshot Evidence
+
+![System Info Script Output Screenshot](./screenshots/system_info_output.png)
 
 ---
 

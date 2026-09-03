@@ -1,50 +1,22 @@
 # Dockerfiles & Images Homework
 
-This folder contains the multi-stage Docker build application and student verification documentation.
+This folder contains the multi-stage Docker build application, student details, and verification screenshots.
+
+---
+
+## Verification Screenshot Evidence
+
+### 1. Web Browser Response (Port 8080)
+![Multi Stage App Browser Screenshot](./screenshots/multistage_app_screenshot.png)
+
+### 2. `docker ps` Terminal Status Verification
+![Docker PS Port 8080 Verification Screenshot](./screenshots/docker_ps_port8080.png)
 
 ---
 
 ## Task 1 & 2: Multi-Stage Dockerfile & Verification
 
-### Application Source (`multi-stage-app/main.go`)
-```go
-package main
-
-import (
-	"fmt"
-	"net/http"
-)
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello World from Docker multi-stage build")
-}
-
-func main() {
-	http.HandleFunc("/", handler)
-	fmt.Println("Server running on port 8080...")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		fmt.Printf("Error starting server: %s\n", err)
-	}
-}
-```
-
-### Multi-Stage Dockerfile (`multi-stage-app/Dockerfile`)
-```dockerfile
-# Stage 1: Build stage
-FROM golang:1.22-alpine AS builder
-WORKDIR /app
-COPY main.go .
-RUN CGO_ENABLED=0 GOOS=linux go build -o server main.go
-
-# Stage 2: Final minimal runtime stage
-FROM alpine:3.19
-WORKDIR /app
-COPY --from=builder /app/server .
-EXPOSE 8080
-CMD ["./server"]
-```
-
-### Student Verification Documentation
+### Student Documentation
 * **Student Name:** posiedon2212
 * **Enrollment Number:** DEV-HW-2026
 * **Application Response Verification:**

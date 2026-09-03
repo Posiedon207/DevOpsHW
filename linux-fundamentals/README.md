@@ -1,6 +1,6 @@
 # Linux Fundamentals Homework
 
-This folder contains the complete tasks and documentation for the Linux Fundamentals module.
+This folder contains the complete tasks, demonstration scripts, screenshots, and documentation for the Linux Fundamentals module.
 
 ---
 
@@ -16,8 +16,9 @@ This folder contains the complete tasks and documentation for the Linux Fundamen
 | **Directories** | Can link to directories. | Cannot link to directories (in standard Linux filesystems). |
 | **Creation Command** | `ln -s target link_name` | `ln target link_name` |
 
-### Demonstration Script & Output
-Run the helper script [`links_demo.sh`](file:///c:/Users/adigo/OneDrive/Desktop/DevOpsHW/linux-fundamentals/links_demo.sh):
+### Screenshot Evidence & Terminal Output
+![Soft Link and Hard Link Terminal Screenshot](./screenshots/links_demo.png)
+
 ```bash
 # 1. Create a sample original file
 echo "DevOps Linux Fundamentals" > original.txt
@@ -37,52 +38,24 @@ cat hardlink.txt   # Returns: "DevOps Linux Fundamentals"
 cat softlink.txt   # Returns: cat: softlink.txt: No such file or directory
 ```
 
-### Interview Q&A
-* **Q: What happens to a hard link when the original file is deleted?**  
-  *A:* The data remains intact on disk and accessible through the hard link because the file's inode reference count is decremented by 1 but has not reached 0. The inode and disk data blocks are only reclaimed when all hard links are deleted.
-* **Q: Why can't hard links link across different filesystems?**  
-  *A:* Inode numbers are unique only within a single filesystem volume. Different filesystems have separate inode tables, so an inode number from filesystem A cannot point to blocks in filesystem B.
-
 ---
 
 ## Task 2: adduser vs useradd
 
 ### Key Differences
-* **`useradd`**: Low-level, native system binary (`/usr/sbin/useradd`). It does not create home directories or prompt for passwords automatically unless explicit flags (`-m`, `-p`, `-s`) are supplied. Portable across all Linux distributions.
-* **`adduser`**: High-level Perl script wrapper (`/usr/sbin/adduser`) primarily on Debian/Ubuntu. It provides an interactive prompt, automatically creates home directories (`/home/username`), assigns a shell, sets up group memberships, copies `/etc/skel` files, and forces initial password creation.
-
-### Recommended Command on Ubuntu
-On Debian and Ubuntu, **`adduser`** is preferred for manual administrative user creation because it enforces best practices interactively without requiring a complex combination of flags.
-
-```bash
-# Recommended Ubuntu interactive command:
-sudo adduser testuser
-
-# Equivalent non-interactive useradd command:
-sudo useradd -m -s /bin/bash -g users testuser
-sudo passwd testuser
-```
+* **`useradd`**: Low-level, native system binary (`/usr/sbin/useradd`). It does not create home directories or prompt for passwords automatically unless explicit flags (`-m`, `-p`, `-s`) are supplied.
+* **`adduser`**: High-level Perl script wrapper (`/usr/sbin/adduser`) primarily on Debian/Ubuntu. It provides an interactive prompt, automatically creates home directories (`/home/username`), assigns a shell, sets up group memberships, and forces initial password creation.
 
 ---
 
 ## Task 3: journalctl
 
-### Purpose
-`journalctl` is the command-line utility used to query and view system logs collected by systemd's logging daemon, `systemd-journald`.
+### Screenshot Evidence & Logs
+![journalctl Log Inspector Terminal Screenshot](./screenshots/journalctl_logs.png)
 
-### Commands & Logs
 ```bash
-# 1. View logs for a specific service (e.g., Nginx)
+# View logs for a specific service (e.g., Nginx)
 journalctl -u nginx.service --no-pager -n 20
-
-# 2. Follow live real-time logs for a service
-journalctl -u docker.service -f
-
-# 3. View logs generated in the last 1 hour
-journalctl --since "1 hour ago"
-
-# 4. View logs with Priority level Error or higher
-journalctl -p err -b
 ```
 
 ---

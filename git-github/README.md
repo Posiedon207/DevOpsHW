@@ -1,6 +1,16 @@
 # Git and GitHub Homework
 
-This folder contains documentation and demonstration tasks for Git operations.
+This folder contains documentation, demonstration tasks, and screenshot evidence for Git operations.
+
+---
+
+## Screenshot Evidence
+
+### 1. `git commit -a -m` vs `git commit -m`
+![Git Commit Comparison Screenshot](./screenshots/git_commit_diff.png)
+
+### 2. `git cherry-pick` Execution Walkthrough
+![Git Cherry Pick Walkthrough Screenshot](./screenshots/git_cherrypick.png)
 
 ---
 
@@ -9,21 +19,6 @@ This folder contains documentation and demonstration tasks for Git operations.
 ### Comparison
 * **`git commit -m "message"`**: Commits **only** the changes that have already been explicitly added to the staging area via `git add <file>`. Unstaged changes in tracked files will remain uncommitted.
 * **`git commit -a -m "message"`**: Automatically stages **all modified and deleted tracked files** and commits them in a single command. Note: It does **not** auto-stage newly created untracked files.
-
-### Execution Test
-```bash
-# 1. Modify an existing tracked file & create a new untracked file
-echo "Updated line" >> tracked_file.txt
-echo "New contents" > untracked_file.txt
-
-# 2. Run standard git commit -m
-git commit -m "Commit attempt"
-# Result: Nothing added to commit! (Changes are unstaged)
-
-# 3. Run git commit -a -m
-git commit -a -m "Auto-stage and commit modified files"
-# Result: tracked_file.txt is committed. untracked_file.txt remains untracked.
-```
 
 ---
 
@@ -60,6 +55,4 @@ git log --oneline -n 3
 # 7x8y9z0 fix(critical): resolve security flaw B (Cherry-picked!)
 # 89ab12c feat(main): add main feature 2
 # 34cd56e feat(main): add main feature 1
-
-ls bugfix.txt  # File exists in main!
 ```
