@@ -1,7 +1,7 @@
 # DevOps Homework Submission
 
-**Student Email:** posiedon2212@gmail.com  
-**Enrollment ID:** DEV-HW-2026  
+**Student Email:** aditya.24bcs10057@sst.scaler.com  
+**Enrollment ID:** 24bcs10057 
 
 This repository contains my completed homework assignments for the DevOps course covering Linux Fundamentals, Shell Scripting, Networking Fundamentals, Git & GitHub, Docker Fundamentals, Dockerfiles & Images, and Docker Networking.
 
