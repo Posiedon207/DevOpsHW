@@ -1,58 +1,31 @@
 # Git and GitHub Homework
 
-This folder contains documentation, demonstration tasks, and screenshot evidence for Git operations.
-
----
-
-## Screenshot Evidence
-
-### 1. `git commit -a -m` vs `git commit -m`
-![Git Commit Comparison Screenshot](./screenshots/git_commit_diff.png)
-
-### 2. `git cherry-pick` Execution Walkthrough
-![Git Cherry Pick Walkthrough Screenshot](./screenshots/git_cherrypick.png)
+This folder contains my tasks and screenshots for Git operations (`git commit -a -m` vs `git commit -m` and `git cherry-pick`).
 
 ---
 
 ## Task 1: `git commit -a -m` vs `git commit -m`
 
-### Comparison
-* **`git commit -m "message"`**: Commits **only** the changes that have already been explicitly added to the staging area via `git add <file>`. Unstaged changes in tracked files will remain uncommitted.
-* **`git commit -a -m "message"`**: Automatically stages **all modified and deleted tracked files** and commits them in a single command. Note: It does **not** auto-stage newly created untracked files.
+### What I Learned
+* **`git commit -m "message"`**: Only commits files that have already been staged using `git add`. If you modified a tracked file but didn't run `git add`, it won't be included in the commit.
+* **`git commit -a -m "message"`**: Automatically stages and commits all modified or deleted tracked files in a single step. (Note: It does not automatically stage new untracked files).
+
+### Screenshot
+![Git Commit Difference](./screenshots/git_commit_diff.png)
 
 ---
 
-## Task 2: Git Cherry-Pick Walkthrough
+## Task 2: Git Cherry-Pick
 
-Run the script [`git_cherrypick_demo.sh`](file:///c:/Users/adigo/OneDrive/Desktop/DevOpsHW/git-github/git_cherrypick_demo.sh) or execute the steps manually:
+### What I Learned & Steps Executed
+`git cherry-pick` allows you to pick a specific commit from another branch and apply it to your current branch without merging the whole branch.
 
-```bash
-# Step 1: Create initial commits on main branch
-git checkout main
-echo "Main feature 1" > main.txt && git add main.txt && git commit -m "feat(main): add main feature 1"
-echo "Main feature 2" >> main.txt && git add main.txt && git commit -m "feat(main): add main feature 2"
+1. Made commits on `main` branch.
+2. Created a new branch (`feature-branch`) and made 3 commits.
+3. Used `git log --oneline` to find the commit hash of the bugfix commit.
+4. Switched back to `main` branch using `git checkout main`.
+5. Ran `git cherry-pick <commit-hash>` to bring only that bugfix commit into `main`.
+6. Verified with `git log` that the commit was added to `main`.
 
-# Step 2: Create a new feature branch and make commits
-git checkout -b feature-branch
-echo "Feature work A" > feature.txt && git add feature.txt && git commit -m "feat(feature): complete step A"
-echo "Critical Bugfix B" > bugfix.txt && git add bugfix.txt && git commit -m "fix(critical): resolve security flaw B"
-echo "Feature work C" >> feature.txt && git add feature.txt && git commit -m "feat(feature): complete step C"
-
-# Step 3: View git log on feature-branch to identify the bugfix commit hash
-git log --oneline -n 3
-# Output:
-# c3a9f12 feat(feature): complete step C
-# a1b2c3d fix(critical): resolve security flaw B
-# e4f5g6h feat(feature): complete step A
-
-# Step 4: Switch back to main and cherry-pick only commit a1b2c3d
-git checkout main
-git cherry-pick a1b2c3d
-
-# Step 5: Verify that critical bugfix B is applied to main branch
-git log --oneline -n 3
-# Output:
-# 7x8y9z0 fix(critical): resolve security flaw B (Cherry-picked!)
-# 89ab12c feat(main): add main feature 2
-# 34cd56e feat(main): add main feature 1
-```
+### Screenshot
+![Git Cherry Pick Walkthrough](./screenshots/git_cherrypick.png)

@@ -1,88 +1,90 @@
 # Linux Fundamentals Homework
 
-This folder contains the complete tasks, demonstration scripts, screenshots, and documentation for the Linux Fundamentals module.
+This folder contains my homework tasks and screenshots for the Linux Fundamentals module.
 
 ---
 
 ## Task 1: Soft Link & Hard Link
 
-### Technical Comparison
-| Feature | Soft Link (Symbolic Link / Symlink) | Hard Link |
-| :--- | :--- | :--- |
-| **Inode** | Has its own unique inode number pointing to target path. | Shares the exact same inode number as the target file. |
-| **Data Pointer** | Points to the original file path. | Points directly to the data blocks on disk. |
-| **Original File Deletion**| Link becomes broken (dangling symlink). | Data remains accessible via hard link until link count drops to 0. |
-| **Cross-Filesystem** | Can span across different filesystems/disks. | Cannot span across different filesystems. |
-| **Directories** | Can link to directories. | Cannot link to directories (in standard Linux filesystems). |
-| **Creation Command** | `ln -s target link_name` | `ln target link_name` |
+### What I Learned & Difference
+* **Soft Link (Symbolic Link):** Acts like a shortcut to the original file path. If the original file is deleted, the soft link breaks. Soft links can link across different filesystems and can also link to directories.
+* **Hard Link:** Points directly to the file's data on disk (same inode). If the original file is deleted, the data is still accessible through the hard link. Hard links cannot span across different filesystems or link to directories.
 
-### Screenshot Evidence & Terminal Output
-![Soft Link and Hard Link Terminal Screenshot](./screenshots/links_demo.png)
-
+### Commands Used
 ```bash
-# 1. Create a sample original file
+# Create a sample file
 echo "DevOps Linux Fundamentals" > original.txt
 
-# 2. Create a Hard Link
+# Create a Hard Link
 ln original.txt hardlink.txt
 
-# 3. Create a Soft Link (Symlink)
+# Create a Soft Link
 ln -s original.txt softlink.txt
 
-# 4. Verify inode numbers and link counts
+# Check inodes and link details
 ls -li original.txt hardlink.txt softlink.txt
 
-# 5. Delete original file and test links
+# Test deleting original file
 rm original.txt
-cat hardlink.txt   # Returns: "DevOps Linux Fundamentals"
-cat softlink.txt   # Returns: cat: softlink.txt: No such file or directory
+cat hardlink.txt   # Output: "DevOps Linux Fundamentals" (Works)
+cat softlink.txt   # Output: No such file or directory (Broken link)
 ```
 
----
-
-## Task 2: adduser vs useradd
-
-### Key Differences
-* **`useradd`**: Low-level, native system binary (`/usr/sbin/useradd`). It does not create home directories or prompt for passwords automatically unless explicit flags (`-m`, `-p`, `-s`) are supplied.
-* **`adduser`**: High-level Perl script wrapper (`/usr/sbin/adduser`) primarily on Debian/Ubuntu. It provides an interactive prompt, automatically creates home directories (`/home/username`), assigns a shell, sets up group memberships, and forces initial password creation.
+### Screenshot
+![Soft Link and Hard Link Screenshot](./screenshots/links_demo.png)
 
 ---
 
-## Task 3: journalctl
+## Task 2: `adduser` vs `useradd`
 
-### Screenshot Evidence & Logs
-![journalctl Log Inspector Terminal Screenshot](./screenshots/journalctl_logs.png)
+### Key Differences & Preferred Command
+* **`useradd`**: A basic low-level command. It creates a user, but it doesn't automatically create a home directory or prompt for a password unless you pass specific flags.
+* **`adduser`**: An interactive high-level script recommended on Ubuntu/Debian. It automatically creates the user's home directory (`/home/username`), copies default profile files, and prompts you to set a password.
 
+### Practice Command
 ```bash
-# View logs for a specific service (e.g., Nginx)
-journalctl -u nginx.service --no-pager -n 20
+# Recommended command on Ubuntu:
+sudo adduser testuser
 ```
+
+---
+
+## Task 3: `journalctl`
+
+### Usage & Purpose
+`journalctl` is used to view system logs managed by `systemd`. It helps in checking system events and troubleshooting services.
+
+### Commands Used
+```bash
+# View recent logs for a specific service (e.g. Nginx)
+journalctl -u nginx.service -n 20
+
+# Follow real-time logs
+journalctl -u docker.service -f
+```
+
+### Screenshot
+![journalctl Screenshot](./screenshots/journalctl_logs.png)
 
 ---
 
 ## Task 4: Linux Command Cheat Sheet
 
-| Category | Command | Description & Usage Example |
-| :--- | :--- | :--- |
-| **Navigation & Files** | `ls -la` | List all files including hidden with long format details. |
-| | `cd /path` | Change directory. |
-| | `pwd` | Print working directory. |
-| | `mkdir -p dir` | Create directory (with parent directories if needed). |
-| | `rm -rf file` | Remove file or directory recursively & forcefully. |
-| | `cp -r src dst` | Copy files or directories recursively. |
-| | `mv src dst` | Move or rename files. |
-| **Viewing & Search** | `cat file` | Display file contents. |
-| | `grep -rn "pat"` | Search pattern recursively with line numbers. |
-| | `find . -name "*.log"`| Search directory tree for files matching pattern. |
-| | `head -n 10` / `tail` | View top or bottom 10 lines of a file. |
-| **Permissions** | `chmod 755 script.sh`| Change file permissions (Read/Write/Execute). |
-| | `chown user:group file`| Change file ownership. |
-| **Process & Memory** | `ps aux` | List all running processes with user details. |
-| | `top` / `htop` | Interactive real-time process monitor. |
-| | `kill -9 PID` | Terminate process forcefully by Process ID. |
-| | `df -h` | Display human-readable disk space usage. |
-| | `free -h` | Display memory (RAM & Swap) utilization. |
-| **System & Network** | `systemctl status srv`| Check status of a systemd service. |
-| | `journalctl -u srv` | View logs for a systemd service. |
-| | `curl -I URL` | Fetch HTTP headers from server. |
-| | `ip a` | Show network interfaces and IP addresses. |
+Here are the important Linux commands I reviewed and practiced:
+
+| Command | Usage / Purpose |
+| :--- | :--- |
+| `ls -la` | List all files with detailed info including hidden files |
+| `cd /path` | Change current working directory |
+| `pwd` | Print working directory path |
+| `mkdir -p folder` | Create a new directory |
+| `rm -rf file_or_folder` | Remove files or folders |
+| `cp -r src dst` | Copy files or folders |
+| `mv src dst` | Move or rename files |
+| `cat file` | Display contents of a file |
+| `grep "pattern" file` | Search for text inside files |
+| `ps aux` | Display all running processes |
+| `df -h` | Show available disk space in human-readable format |
+| `chmod 755 script.sh` | Change file permissions |
+| `systemctl status service` | Check status of a service |
+| `journalctl -u service` | View logs for a specific service |
