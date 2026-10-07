@@ -1,6 +1,7 @@
 # Session 21: Final DevOps Project & Multi-Container Orchestration
 
-**Student:** posiedon2212@gmail.com  
+**Student Email:** aditya.24bcs10057@sst.scaler.com  
+**Enrollment ID:** 24bcs10057  
 **GitHub Repository:** [Posiedon207/DevOpsHW](https://github.com/Posiedon207/DevOpsHW)  
 **Submission Form:** Session 21 DevOps Homework  
 
@@ -234,9 +235,9 @@ Running `docker-compose up -d --build` and checking container states with `docke
 ---
 
 ### 2. Frontend UI Running on `localhost:3000`
-The live web dashboard running on port 3000, displaying status cards for each tier, live telemetry, and interactive task operations:
+The live TaskBoard application dashboard running on port 3000, displaying workspace overview, task metrics (Total, To do, In progress, Completed), task management board, recent team activity, and CI/CD deployment pipeline status:
 
-![UI running on localhost:3000](./screenshots/02_frontend_localhost_3000.png)
+![TaskBoard UI running on localhost:3000](./screenshots/02_frontend_localhost_3000.png)
 
 ---
 
