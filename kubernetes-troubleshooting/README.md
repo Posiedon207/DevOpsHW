@@ -1,7 +1,7 @@
 # Session 14: Kubernetes Troubleshooting
 
-**Student:** posiedon2212@gmail.com
-**Enrollment ID:** DEV-HW-2026
+**Student Email:** aditya.24bcs10057@sst.scaler.com  
+**Enrollment ID:** 24bcs10057  
 
 ---
 
