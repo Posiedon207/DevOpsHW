@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps 3-Tier Application | Session 21</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <div>
+          <h1>DevOps 3-Tier Application</h1>
+          <p class="subtitle">Session 21 &bull; Docker Compose &bull; PostgreSQL &bull; FastAPI &bull; Prometheus</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          <span id="global-status-text">Stack Online</span>
+        </div>
+        <div class="badge-student">posiedon2212@gmail.com</div>
+      </div>
+    </header>
+
+    <!-- Quick Navigation Links (Specifically highlighting /docs, /health, /metrics) -->
+    <div class="quick-nav-bar">
+      <div class="nav-title">API Endpoints:</div>
+      <div class="nav-links">
+        <a href="http://localhost:8000/docs" target="_blank" class="nav-pill pill-docs" id="link-docs">
+          <span class="icon">📖</span>
+          <span>Swagger UI (/docs)</span>
+          <span class="ext-icon">&nearr;</span>
+        </a>
+        <a href="http://localhost:8000/health" target="_blank" class="nav-pill pill-health" id="link-health">
+          <span class="icon">💚</span>
+          <span>Health Check (/health)</span>
+          <span class="ext-icon">&nearr;</span>
+        </a>
+        <a href="http://localhost:8000/metrics" target="_blank" class="nav-pill pill-metrics" id="link-metrics">
+          <span class="icon">📊</span>
+          <span>Prometheus (/metrics)</span>
+          <span class="ext-icon">&nearr;</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tier Status Cards -->
+    <section class="tiers-grid">
+      <!-- Tier 1: Frontend -->
+      <div class="card tier-card">
+        <div class="card-header">
+          <div class="tier-tag">TIER 1 &bull; PRESENTATION</div>
+          <span class="badge-status badge-success" id="fe-badge">RUNNING</span>
+        </div>
+        <div class="tier-title-row">
+          <div class="tier-icon fe-icon">&#128187;</div>
+          <div>
+            <h3>Frontend Client</h3>
+            <p class="tier-port">localhost:3000</p>
+          </div>
+        </div>
+        <div class="tier-meta">
+          <div class="meta-item"><span class="label">Technology:</span> <span class="val">Node.js / SPA</span></div>
+          <div class="meta-item"><span class="label">Container:</span> <span class="val">devops-frontend</span></div>
+          <div class="meta-item"><span class="label">Status:</span> <span class="val text-success">Active &bull; Serving</span></div>
+        </div>
+      </div>
+
+      <!-- Tier 2: Backend -->
+      <div class="card tier-card">
+        <div class="card-header">
+          <div class="tier-tag">TIER 2 &bull; APPLICATION API</div>
+          <span class="badge-status badge-success" id="be-badge">HEALTHY</span>
+        </div>
+        <div class="tier-title-row">
+          <div class="tier-icon be-icon">&#9881;</div>
+          <div>
+            <h3>FastAPI Microservice</h3>
+            <p class="tier-port">localhost:8000</p>
+          </div>
+        </div>
+        <div class="tier-meta">
+          <div class="meta-item"><span class="label">Framework:</span> <span class="val">FastAPI + Uvicorn</span></div>
+          <div class="meta-item"><span class="label">Container:</span> <span class="val">devops-backend</span></div>
+          <div class="meta-item"><span class="label">Uptime:</span> <span class="val" id="be-uptime">Calculating...</span></div>
+        </div>
+      </div>
+
+      <!-- Tier 3: PostgreSQL Database -->
+      <div class="card tier-card">
+        <div class="card-header">
+          <div class="tier-tag">TIER 3 &bull; PERSISTENCE</div>
+          <span class="badge-status badge-success" id="db-badge">CONNECTED</span>
+        </div>
+        <div class="tier-title-row">
+          <div class="tier-icon db-icon">&#128451;</div>
+          <div>
+            <h3>PostgreSQL Database</h3>
+            <p class="tier-port">localhost:5432</p>
+          </div>
+        </div>
+        <div class="tier-meta">
+          <div class="meta-item"><span class="label">Engine:</span> <span class="val">PostgreSQL 15</span></div>
+          <div class="meta-item"><span class="label">Database:</span> <span class="val">devops_db</span></div>
+          <div class="meta-item"><span class="label">Connection:</span> <span class="val text-success" id="db-conn-status">Healthy</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <!-- Left Column: Tasks & Live Data -->
+      <div class="tasks-section">
+        <div class="card">
+          <div class="section-header">
+            <div>
+              <h2>DevOps Course Deployment Tasks</h2>
+              <p class="section-desc">Live records queried from PostgreSQL via FastAPI backend</p>
+            </div>
+            <button class="btn btn-primary" id="btn-refresh">&#8635; Refresh Data</button>
+          </div>
+
+          <!-- Add Task Form -->
+          <form class="task-form" id="new-task-form">
+            <input type="text" id="task-title" placeholder="New Task Title (e.g. Session 21 Docker Verification)" required />
+            <input type="text" id="task-desc" placeholder="Task Description" />
+            <button type="submit" class="btn btn-accent">+ Add Task</button>
+          </form>
+
+          <!-- Tasks List -->
+          <div class="tasks-list" id="tasks-container">
+            <div class="loading-state">Connecting to backend API...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: System & Architecture Diagnostics -->
+      <div class="diagnostics-section">
+        <div class="card">
+          <h2>Deployment Diagnostics</h2>
+          <div class="diag-block">
+            <div class="diag-label">Docker Compose Command</div>
+            <pre class="code-box"><code>docker-compose up -d --build</code></pre>
+          </div>
+
+          <div class="diag-block">
+            <div class="diag-label">Runtime Environment</div>
+            <div class="key-value-list" id="sys-info-box">
+              <div class="kv-row"><span class="k">Host:</span> <span class="v" id="sys-host">Loading...</span></div>
+              <div class="kv-row"><span class="k">OS / Architecture:</span> <span class="v" id="sys-os">Windows / WSL2 Linux</span></div>
+              <div class="kv-row"><span class="k">Python Engine:</span> <span class="v" id="sys-python">FastAPI 0.136+</span></div>
+              <div class="kv-row"><span class="k">Network:</span> <span class="v">devops-network (Bridge)</span></div>
+              <div class="kv-row"><span class="k">Prometheus Scrape:</span> <span class="v text-accent">Active (Port 8000)</span></div>
+            </div>
+          </div>
+
+          <div class="diag-block">
+            <div class="diag-label">Live Health API Response</div>
+            <pre class="json-box" id="raw-health-json">Fetching http://localhost:8000/health...</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>DevOps Homework Submission &bull; <strong>Posiedon207/DevOpsHW</strong> &bull; Complete 3-Tier Multi-Container Stack</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

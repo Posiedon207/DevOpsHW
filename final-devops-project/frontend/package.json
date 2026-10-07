@@ -1,0 +1,13 @@
+{
+  "name": "devops-frontend",
+  "version": "1.0.0",
+  "description": "DevOps 3-Tier Web Application Frontend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["devops", "docker", "frontend"],
+  "author": "posiedon2212@gmail.com",
+  "license": "MIT"
+}
